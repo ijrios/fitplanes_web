@@ -32,4 +32,4 @@ const Tarea_unus_esquema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("Tareas_plan_unus", Tarea_unus_esquema);
+export default mongoose.model("Tareas_unus", Tarea_unus_esquema);

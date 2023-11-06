@@ -1,7 +1,7 @@
 import Tareas_duo from "../modelos/modelo.tareas_duo.js";
 
 // Obtenemos todas las tareas
-export const Obtener_tareas = async (req, res) => {
+export const obtener_tareas = async (req, res) => {
   try {
     const tareas = await Tareas_duo.find({ user : req.user.id }).populate("usuario");
     res.json(tareas);
@@ -11,7 +11,7 @@ export const Obtener_tareas = async (req, res) => {
 };
 
 // Creamos las tareas
-export const Crear_tarea = async (req, res) => {
+export const crear_tarea = async (req, res) => {
     try {
       const { dias_entrenamiento, description, hidratacion, dieta } = req.body;
       const nuevaTarea = new Tareas_duo({
@@ -29,7 +29,7 @@ export const Crear_tarea = async (req, res) => {
   };
   
   // Eiminamos tareas segun id
-  export const Eliminar_tarea = async (req, res) => {
+  export const eliminar_tarea = async (req, res) => {
     try {
       const deletedTarea = await Tareas_duo.findByIdAndDelete(req.params.id);
       if (!deletedTarea)

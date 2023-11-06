@@ -32,4 +32,4 @@ const Tarea_duo_esquema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("Tareas_plan_duo", Tarea_duo_esquema);
+export default mongoose.model("Tareas_duo", Tarea_duo_esquema);

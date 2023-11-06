@@ -32,4 +32,4 @@ const Tarea_tris_esquema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("Tareas_plan_tris", Tarea_tris_esquema);
+export default mongoose.model("Tareas_tris", Tarea_tris_esquema);
