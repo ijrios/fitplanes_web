@@ -7,14 +7,12 @@ import {
   actualizar_tareas,
 } from "../controladores/controlador.tareas_tris.js";
 import { ValidacionRequerida } from "../middlewares/auth.middleware.js";
-import { validateSchema } from "../middlewares/validator.middleware.js";
-import { createTaskSchema } from "../schemas/task.schema.js";
 
 const router = Router();
 
 router.get("/tareas", ValidacionRequerida, Obtener_tareas);
 
-router.post("/tareas", ValidacionRequerida, validateSchema(createTaskSchema), Crear_tarea);
+router.post("/tareas", ValidacionRequerida, Crear_tarea);
 
 router.get("/tareas/:id", ValidacionRequerida, obtener_tarea);
 

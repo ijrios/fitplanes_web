@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const Tarea_tris_esquema = new mongoose.Schema(
   {
     dias_entrenamiento: {
-      type: int,
+      type: String,
       required: true,
     },
     description: {
