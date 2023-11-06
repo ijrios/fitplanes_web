@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    username: {
+    usuario: {
       type: String, //tipo texto
       required: true, // Campo obligatorio
       trim: true, // Limpiar los espacios y organiza la estructura
@@ -12,12 +12,12 @@ const userSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    email: {
+    correo: {
       type: String,
       required: true,
       unique: true, //campo unico 
     },
-    password: {
+    contraseña: {
       type: String,
       required: true,
     },

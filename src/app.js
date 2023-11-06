@@ -7,7 +7,8 @@ const app = express();
 
 // Middlewares
 app.use(morgan("dev"));
-app.use(ruta_autenticacion);
+app.use(express.json()); //convertir request en formato json 
+app.use('/api', ruta_autenticacion);
 
 
 export default app;
