@@ -1,5 +1,6 @@
 import { Router } from "express";
-import {acceso,registro} from "../controladores/controlador.autenticacion.js";
+import {acceso,registro,salir, perfil} from "../controladores/controlador.autenticacion.js";
+import {ValidacionRequerida} from '../middlewares/Validar_token.js'
 
 const router = Router();
 
@@ -7,6 +8,8 @@ const router = Router();
 // Asignamos ruta para la autenticación 
 router.post("/registro", registro); //cuando a una peticion post a /registro ejecta función registro
 router.post("/acceso", acceso);
+router.post("/salir", salir);
+router.get("/perfil", ValidacionRequerida, perfil);
 
 
 export default router;

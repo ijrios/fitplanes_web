@@ -44,8 +44,6 @@ export const registro = async (req, res) => {
             plan: Usuario_guardado.plan,
         })
 
-        
-
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -59,7 +57,7 @@ export const acceso = async (req, res) => {
     try {
 
         // Para encontrar usuario creado
-        const Usuario_encontrado = await Usuario.findOne({correo,plan})
+        const Usuario_encontrado = await Usuario.findOne({correo, plan})
         if(!Usuario_encontrado) return res.status(400).json({message: "Usuario no encontrado"});
 
         // Para encontrar contraseña incorrecta
@@ -93,4 +91,24 @@ export const acceso = async (req, res) => {
     //console.log(nuevo_usuario)
 };
 
+// Salir de la sesion 
+export const salir = (req, res) => {
+    res.cookie('token', '', {
+      expires: new Date(0) 
+    });
+    // Otras operaciones relacionadas con la salida de la sesión
+    return res.status(200).json({ message: "Sesion finalizada" });
+  }
 
+  // Perfil
+export const perfil = async (req, res) => {
+    const usuario_encontra = await Usuario.findById(req.user.id)
+
+    if(!usuario_encontra) return res.status(400).json({ message: "Usuario no encontrado"});
+    return res.json({
+        id: usuario_encontra._id,
+        usuario: usuario_encontra.usuario,
+        correo: usuario_encontra.correo,
+        plan: usuario_encontra.plan,
+    })
+  }
