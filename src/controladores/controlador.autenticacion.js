@@ -59,7 +59,7 @@ export const acceso = async (req, res) => {
     try {
 
         // Para encontrar usuario creado
-        const Usuario_encontrado = await Usuario.findOne({correo})
+        const Usuario_encontrado = await Usuario.findOne({correo,plan})
         if(!Usuario_encontrado) return res.status(400).json({message: "Usuario no encontrado"});
 
         // Para encontrar contraseña incorrecta
