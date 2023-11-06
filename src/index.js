@@ -3,6 +3,7 @@ import app from "./app.js"
 import { connectDB } from "./database.js";
 
 connectDB();
+// Exponemos serviico por puerto 4000 (se puede cambiar)
 app.set('puerto', process.env.PORT || 4000);
 
 // El servidor está escuchando

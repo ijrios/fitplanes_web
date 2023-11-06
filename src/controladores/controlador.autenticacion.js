@@ -10,7 +10,7 @@ export const registro = async (req, res) => {
     //console.log(correo,contraseña,usuario,plan)
     try {
 
-        // hashing contraseña
+        // Hashing contraseña
         const constraseña_hash = await bcrypt.hash(contraseña, 10);
 
         // Creando nuevo usuario
