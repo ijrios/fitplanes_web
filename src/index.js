@@ -1,5 +1,5 @@
 import express from 'express';
-import app from "./aplicacion.js"
+import app from "./app.js"
 import { connectDB } from "./database.js";
 
 connectDB();

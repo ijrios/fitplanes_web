@@ -3,9 +3,9 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema(
   {
     username: {
-      type: String,
-      required: true,
-      trim: true,
+      type: String, //tipo texto
+      required: true, // Campo obligatorio
+      trim: true, // Limpiar los espacios y organiza la estructura
     },
     plan: {
       type: String,
@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
+      unique: true, //campo unico 
     },
     password: {
       type: String,
