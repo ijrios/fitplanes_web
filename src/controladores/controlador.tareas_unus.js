@@ -33,14 +33,15 @@ export const crear_tarea = async (req, res) => {
   export const eliminar_tarea = async (req, res) => {
     try {
       const deletedTarea = await Tareas_unus.findByIdAndDelete(req.params.id);
+      console.log("Tarea eliminada")
       if (!deletedTarea)
         return res.status(404).json({ message: "Tarea no encontrada, no se elimina" });
-  
+      
       return res.sendStatus(204);
     } catch (error) {
       return res.status(500).json({ message: error.message });
     }
-    console.log("Tarea eliminada")
+    
   };
   
   // Actualizamos las tareas individuales segun id
