@@ -6,7 +6,7 @@ const Tarea_tris_esquema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    description: {
+    descripcion: {
       type: String,
       required: true,
     },
@@ -18,7 +18,7 @@ const Tarea_tris_esquema = new mongoose.Schema(
         type: String,
         required: true,
       },
-    date: {
+    fecha: {
       type: Date,
       default: Date.now,
     },

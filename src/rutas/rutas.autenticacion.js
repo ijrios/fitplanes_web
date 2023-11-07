@@ -6,6 +6,7 @@ const router = Router();
 
 // Engloba rutas relacionadas con la autenticación
 // Asignamos ruta para la autenticación 
+// CRUD USUARIOS
 router.post("/registro", registro); //cuando a una peticion post a /registro ejecta función registro
 router.post("/acceso", acceso);
 router.post("/salir", salir);

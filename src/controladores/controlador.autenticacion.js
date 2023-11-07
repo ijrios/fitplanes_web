@@ -22,7 +22,7 @@ export const registro = async (req, res) => {
         })
         const Usuario_guardado = await nuevo_usuario.save();
 
-        // Creamos el token de acceso (pase) para saber que esta logrado
+        // Creamos el token de acceso (pase) para saber que esta logeado
         const token = await createAccessToken({
             id: Usuario_guardado._id,
             usuario: Usuario_guardado.usuario,
@@ -48,9 +48,10 @@ export const registro = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
     //console.log(nuevo_usuario)
+    console.log("Usuario creado");
 };
 
-// Acceso con metodo asincrono
+// se crea Acceso con metodo asincrono 
 export const acceso = async (req, res) => {
     const {correo, contraseña, plan} =  req.body
     //console.log(correo,contraseña,plan)
@@ -89,15 +90,18 @@ export const acceso = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
     //console.log(nuevo_usuario)
+    console.log("Sesion iniciada");
 };
 
-// Salir de la sesion 
+// METODO Salir de la sesion 
 export const salir = (req, res) => {
     res.cookie('token', '', {
       expires: new Date(0) 
     });
+    console.log("Sesion finalizada");
     // Otras operaciones relacionadas con la salida de la sesión
     return res.status(200).json({ message: "Sesion finalizada" });
+    
   }
 
   // Perfil

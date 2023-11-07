@@ -13,16 +13,17 @@ export const obtener_tareas = async (req, res) => {
 // Creamos tareas
 export const crear_tarea = async (req, res) => {
     try {
-      const { dias_entrenamiento, description, hidratacion, dieta } = req.body;
+      const { dias_entrenamiento, descripcion, hidratacion, dieta, fecha } = req.body;
       const nuevaTarea = new Tareas_unus({
         dias_entrenamiento,
-        description,
+        descripcion,
         hidratacion,
         dieta,
-        usuario: req.user.id,
+        fecha,
+        usuario: req.user.id
       });
-      await nuevaTarea.save();
-      res.json(nuevaTarea);
+      const tarea_guardada = await nuevaTarea.save();
+      res.json(tarea_guardada);
     } catch (error) {
       return res.status(500).json({ message: error.message });
     }
@@ -39,15 +40,16 @@ export const crear_tarea = async (req, res) => {
     } catch (error) {
       return res.status(500).json({ message: error.message });
     }
+    console.log("Tarea eliminada")
   };
   
   // Actualizamos las tareas individuales segun id
   export const actualizar_tareas = async (req, res) => {
     try {
-      const { dias_entrenamiento, description, hidratacion, dieta } = req.body;
+      const { dias_entrenamiento, descripcion, hidratacion, dieta } = req.body;
       const tareaActualizada = await Tareas_unus.findByIdAndUpdate(
         req.params.id,
-        { dias_entrenamiento, description, hidratacion, dieta },
+        { dias_entrenamiento, descripcion, hidratacion, dieta },
         { new: true }
       );
       return res.json(tareaActualizada);

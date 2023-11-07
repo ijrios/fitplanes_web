@@ -5,20 +5,21 @@ import {
   obtener_tarea,
   obtener_tareas,
   actualizar_tareas,
-} from "../controladores/controlador.tareas_tris.js";
-import { ValidacionRequerida } from "../middlewares/auth.middleware.js";
+} from "../controladores/controlador.tareas_duo.js";
+import { ValidacionRequerida } from "../middlewares/Validar_token.js";
 
 const router = Router();
 
-router.get("/tareas", ValidacionRequerida, obtener_tareas);
+// CRUD TAREAS
+router.get("/tareas_tris", ValidacionRequerida, obtener_tareas);
 
-router.post("/tareas", ValidacionRequerida, crear_tarea);
+router.post("/tareas_tris", ValidacionRequerida, crear_tarea);
 
-router.get("/tareas/:id", ValidacionRequerida, obtener_tarea);
+router.get("/tareas_tris/:id", ValidacionRequerida, obtener_tarea);
 
-router.put("/tareas/:id", ValidacionRequerida, actualizar_tareas);
+router.put("/tareas_tris/:id", ValidacionRequerida, actualizar_tareas);
 
-router.delete("/tareas/:id", ValidacionRequerida, eliminar_tarea);
+router.delete("/tareas_tris/:id", ValidacionRequerida, eliminar_tarea);
 
 export default router;
 
