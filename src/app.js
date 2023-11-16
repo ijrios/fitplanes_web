@@ -5,12 +5,14 @@ import ruta_autenticacion from './rutas/rutas.autenticacion.js';
 import ruta_tarea_unus from  './rutas/rutas.tareas.plan_unus.js';
 import ruta_tarea_duo from './rutas/rutas.tareas.plan_duo.js';
 import ruta_tarea_tris from './rutas/rutas.tareas.plan_tris.js';
+import cors from 'cors';
 
 
 // Inizializaciones
 const app = express();
 
 // Middlewares
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json()); //convertir request en formato json 
 app.use(cokieParser());

@@ -6,7 +6,7 @@ import bcrypt from "bcryptjs";
 
 // Registrar con metodo asincrono
 export const registro = async (req, res) => {
-    const {correo, contraseña, usuario, plan} =  req.body
+    const {correo, contraseña, usuario, plan, nombre} =  req.body
     //console.log(correo,contraseña,usuario,plan)
     try {
 
@@ -15,6 +15,7 @@ export const registro = async (req, res) => {
 
         // Creando nuevo usuario
         const nuevo_usuario = new Usuario({
+            nombre,
             usuario,
             plan,
             correo,
@@ -25,6 +26,7 @@ export const registro = async (req, res) => {
         // Creamos el token de acceso (pase) para saber que esta logeado
         const token = await createAccessToken({
             id: Usuario_guardado._id,
+            nombre: Usuario_guardado.nombre,
             usuario: Usuario_guardado.usuario,
             correo: Usuario_guardado.correo,
             plan: Usuario_guardado.plan,
@@ -39,6 +41,7 @@ export const registro = async (req, res) => {
 
         res.json({
             id: Usuario_guardado._id,
+            nombre: Usuario_guardado.nombre,
             usuario: Usuario_guardado.usuario,
             correo: Usuario_guardado.correo,
             plan: Usuario_guardado.plan,
@@ -53,7 +56,7 @@ export const registro = async (req, res) => {
 
 // se crea Acceso con metodo asincrono 
 export const acceso = async (req, res) => {
-    const {correo, contraseña, plan} =  req.body
+    const {correo, contraseña, plan, nombre} =  req.body
     //console.log(correo,contraseña,plan)
     try {
 
@@ -68,6 +71,7 @@ export const acceso = async (req, res) => {
         // Creamos el token de acceso (pase) para saber que esta logrado
         const token = await createAccessToken({
             id: Usuario_encontrado._id,
+            nombre: Usuario_encontrado.nombre,
             usuario: Usuario_encontrado.usuario,
             correo: Usuario_encontrado.correo,
             plan: Usuario_encontrado.plan,
@@ -81,6 +85,7 @@ export const acceso = async (req, res) => {
 
         res.json({
             id: Usuario_encontrado._id,
+            nombre: Usuario_encontrado.nombre,
             usuario: Usuario_encontrado.usuario,
             correo: Usuario_encontrado.correo,
             plan: Usuario_encontrado.plan,
@@ -111,6 +116,7 @@ export const perfil = async (req, res) => {
     if(!usuario_encontra) return res.status(400).json({ message: "Usuario no encontrado"});
     return res.json({
         id: usuario_encontra._id,
+        nombre: usuario_encontra.nombre,
         usuario: usuario_encontra.usuario,
         correo: usuario_encontra.correo,
         plan: usuario_encontra.plan,

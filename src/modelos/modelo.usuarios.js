@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
+    nombre: {
+      type: String, //tipo texto
+      required: true, // Campo obligatorio
+      trim: true, // Limpiar los espacios y organiza la estructura
+    },
     usuario: {
       type: String, //tipo texto
       required: true, // Campo obligatorio

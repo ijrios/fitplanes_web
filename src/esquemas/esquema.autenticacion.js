@@ -1,6 +1,9 @@
 import { z } from "zod";
 
 export const Registro_esquema = z.object({
+  nombre: z.string({
+    required_error: "Nombre completo es requerido",
+   }),
   usuario: z.string({
     required_error: "Usuario es requerido",
    }),
