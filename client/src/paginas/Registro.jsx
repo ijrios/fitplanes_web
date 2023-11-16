@@ -1,10 +1,6 @@
 /*
 import { Registro_esquema } from "../esquemas/autenticacion";
 import { zodResolver } from "@hookform/resolvers/zod";
-
- 
-            
-
 */
 import { Card, Message, Button, Input, Label} from "../componentes/ui";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,11 +8,10 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { useState } from 'react';
 import { useAuth } from "../contexto/autenticacionContexto";
-import { sign } from "jsonwebtoken";
 
 
 function Registro() {
-    const {signup, isAuthenticated, plan, error: RegistroError} = useAuth();
+    const {signup, isAuthenticated, plan, errors: RegistroError} = useAuth();
     //console.log(usuario)
     const {register, handleSubmit, formState: { errors },} = useForm();
     const navigate = useNavigate();
@@ -30,16 +25,20 @@ function Registro() {
   })
  
     useEffect(() => {
-      if (isAuthenticated && plan == "Plan 1") navigate("/tasks");
-      if (isAuthenticated && plan == "Plan 2") navigate("/tasks");
-      if (isAuthenticated && plan == "Plan 3") navigate("/tasks");
+      if (isAuthenticated && plan == "Plan 1") navigate("/Plan 1");
+      if (isAuthenticated && plan == "Plan 2") navigate("/Plan 2");
+      if (isAuthenticated && plan == "Plan 3") navigate("/Plan 3");
     }, [isAuthenticated,plan]);
   
     return (
       <div className="flex items-center justify-center">
-        {RegistroError.map((error, i) => (
-            <Message message={error} key={i} />
-          ))}
+        {Array.isArray(RegistroError) ? (
+  RegistroError.map((error, i) => (
+    <Message message={error} key={i} />
+  ))
+) : (
+  <Message message={RegistroError} /> // o ajusta esto según cómo quieras mostrar el mensaje de error no array
+)}
 
         <Card>
           <h1 className="text-3xl font-bold">Registro</h1>
@@ -60,7 +59,7 @@ function Registro() {
             <Input
               type="text"
               name="usuario"
-              placeholder="Escribe tu usario de acceso"
+              placeholder="Escribe tu usuario de acceso"
               {...register("usuario", {required:true})}
   
             />

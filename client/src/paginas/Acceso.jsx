@@ -1,104 +1,71 @@
+import { Card, Message, Button, Input, Label} from "../componentes/ui";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { useAuth } from "../contexto/autenticacionContexto";
 
 export const Acceso = () => {
-  const { signin } = useAuth();
+  const { signin, plan,isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(loginSchema),
-  });
+  } = useForm();
 
-  const onSubmit = async (data) => {
-    try {
-      // Llamar a la función de inicio de sesión en el servidor
-      const response = await signin(data);
+  const onSubmit =  handleSubmit(async (values) => {
+    await signin(values);
+  })
 
-      // Verificar si la autenticación fue exitosa y redirigir en consecuencia
-      if (response.success) {
-        const { plan } = response.user;
-        if (plan === "plan1") {
-          navigate("/plan1"); // Redirigir a la ruta de plan1
-        } else if (plan === "plan2") {
-          navigate("/plan2"); // Redirigir a la ruta de plan2
-        } else if (plan === "plan3") {
-          navigate("/plan3"); // Redirigir a la ruta de plan3
-        } else {
-          // Valor de "plan" desconocido, puedes manejarlo de acuerdo a tus necesidades.
-          navigate("/unknown-plan");
-        }
-      } else {
-        // Autenticación fallida, mostrar mensaje de error si es necesario
-      }
-    } catch (error) {
-      // Manejar errores de autenticación
-    }
-  };
+  useEffect(() => {
+    if (isAuthenticated && plan == "Plan 1") navigate("/Plan 1");
+    if (isAuthenticated && plan == "Plan 2") navigate("/Plan 2");
+    if (isAuthenticated && plan == "Plan 3") navigate("/Plan 3");
+  }, [isAuthenticated, plan]);
+
 
   return (
     <div className="h-[calc(100vh-100px)] flex items-center justify-center">
       <Card>
         <h1 className="text-2xl font-bold">Login</h1>
-
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Label htmlFor="correo">Correo Electrónico:</Label>
-          <Input
-            label="Escribe tu corre"
-            type="correo"
-            name="correo"
-            placeholder="tucorreo@dominio.com"
-            {...register("correo", { required: true })}
-          />
-          <p>{errors.correo?.message}</p>
-
-          <Label htmlFor="contraseña">Contraseña:</Label>
-          <Input
-            type="contraseña"
-            name="contraseña"
-            placeholder="Escribe tu contraseña"
-            {...register("password", { required: true, minLength: 6 })}
-          />
-          <p>{errors.contraseña?.message}</p>
-
           <Label htmlFor="plan">Plan:</Label>
-          <div>
-            <input
-              type="checkbox"
-              id="planUnus"
-              name="plan"
-              value="Plan 1"
-              checked={selectedPlan.includes('Plan 1')}
-              onChange={() => handleCheckboxChange('Plan 1')}
-            />
-            <label htmlFor="planUnus">Plan unus</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="planDuo"
-              name="plan"
-              value="Plan 2"
-              checked={selectedPlan.includes('Plan 2')}
-              onChange={() => handleCheckboxChange('Plan 2')}
-            />
-            <label htmlFor="planDuo">Plan duo</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="planTris"
-              name="plan"
-              value="Plan 3"
-              checked={selectedPlan.includes('Plan 3')}
-              onChange={() => handleCheckboxChange('Plan 3')}
-            />
-            <label htmlFor="planTris">Plan tris</label>
+          <select
+            name="plan"
+            className="w-80 bg-zinc-700 text-white px-2 py-2 rounded-md"
+            style={{ fontSize: "14px" }} // Ajusta el tamaño de la fuente según sea necesario
             {...register("plan", { required: true })}
-          </div>
-          <Button>Acceder</Button>
-        </form>
+          >
+            <option value="Plan 1">Plan uno</option>
+            <option value="Plan 2">Plan dos</option>
+            <option value="Plan 3">Plan tres</option>
+          </select>
+
+            <Label htmlFor="correo">Correo Electrónico:</Label>
+            <Input
+              name="correo"
+              placeholder="tucorreo@dominio.com"
+              {...register("correo", {required:true})}
+            />
+
+           {errors.correo?.message && (
+              <p className="text-red-500">{errors.correo?.message}</p>
+            )}
+           
+            <Label htmlFor="contraseña">Contraseña:</Label>
+            <Input
+              type="contraseña"
+              name="contraseña"
+              placeholder="********"
+              {...register("contraseña", {required:true})}
+            />
+          
+            {errors.contraseña?.message && (
+              <p className="text-red-500">{errors.contraseña?.message}</p>
+            )}
+  
+          <Button >Acceder</Button>
+          </form>
 
         <p className="flex gap-x-2 justify-between">
           ¿No tienes una cuenta? <Link to="/register" className="text-sky-500">Sign up</Link>

@@ -10,8 +10,8 @@ export const registro = async (req, res) => {
     //console.log(correo,contraseña,usuario,plan)
     try {
 
-        const userFound = await Usuario.findOne({email})
-        if (userFound) return res.status(400).json({message: "Correo ya está en uso"})
+        const userFound = await Usuario.findOne({correo})
+        if (userFound) return res.status(400).json(["Correo ya está en uso"])
         
 
         // Hashing contraseña
