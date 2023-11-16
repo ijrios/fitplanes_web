@@ -1,18 +1,19 @@
 import { useEffect } from "react";
 import { createContext, useContext, useState } from "react";
-import { loginRequest, registerRequest, verifyTokenRequest } from "../api/autenticancion";
+import { loginRequest, registerRequest } from "../api/autenticancion";
 import Cookies from "js-cookie";
 
 const AuthContext = createContext();
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (!context) throw new Error("useAuth must be used within a AuthProvider");
+  if (!context) throw new Error("useAuth debería estar dentro de AuthProvider");
   return context;
 };
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [usuario, setUser] = useState(null);
+  const [plan, setPlan] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -29,9 +30,12 @@ export const AuthProvider = ({ children }) => {
 
   const signup = async (usuario) => {
     try {
+    
       const res = await registerRequest(usuario);
+      console.log(res)
       if (res.status === 200) {
         setUser(res.data);
+        setPlan(res.data.plan);
         setIsAuthenticated(true);
       }
     } catch (error) {
@@ -84,7 +88,8 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        user,
+        usuario,
+        plan,
         signup,
         signin,
         logout,

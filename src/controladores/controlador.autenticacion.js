@@ -10,6 +10,10 @@ export const registro = async (req, res) => {
     //console.log(correo,contraseña,usuario,plan)
     try {
 
+        const userFound = await Usuario.findOne({email})
+        if (userFound) return res.status(400).json({message: "Correo ya está en uso"})
+        
+
         // Hashing contraseña
         const constraseña_hash = await bcrypt.hash(contraseña, 10);
 

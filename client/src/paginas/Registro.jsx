@@ -1,49 +1,49 @@
 /*
-import { useEffect } from "react";
-import { useAuth } from "../contexto/autenticacionContexto";
 import { Registro_esquema } from "../esquemas/autenticacion";
 import { zodResolver } from "@hookform/resolvers/zod";
 
- {registerErrors.map((error, i) => (
-            <Message message={error} key={i} />
-          ))}
-
-            {errors.contraseña?.message && (
-              <p className="text-red-500">{errors.contraseña?.message}</p>
-            )}
+ 
+            
 
 */
 import { Card, Message, Button, Input, Label} from "../componentes/ui";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import { useState } from 'react';
-import { registerRequest } from "../api/autenticancion";
+import { useAuth } from "../contexto/autenticacionContexto";
+import { sign } from "jsonwebtoken";
 
 
 function Registro() {
-    //const { signup, errors: registerErrors, isAuthenticated } = useAuth();
-    const {register, handleSubmit,
-     // formState: { errors },
-    } = useForm();
-    //const navigate = useNavigate();
+    const {signup, isAuthenticated, plan, error: RegistroError} = useAuth();
+    //console.log(usuario)
+    const {register, handleSubmit, formState: { errors },} = useForm();
+    const navigate = useNavigate();
 
     //const onSubmit = async (value) => {
     //  await signup(value);
    // };
+
+  const onSubmit =  handleSubmit(async (values) => {
+    await signup(values);
+  })
  
-    //useEffect(() => {
-    //  if (isAuthenticated) navigate("/tasks");
-   // }, [isAuthenticated]); h-[calc(8vh-80px)]
+    useEffect(() => {
+      if (isAuthenticated && plan == "Plan 1") navigate("/tasks");
+      if (isAuthenticated && plan == "Plan 2") navigate("/tasks");
+      if (isAuthenticated && plan == "Plan 3") navigate("/tasks");
+    }, [isAuthenticated,plan]);
   
     return (
       <div className="flex items-center justify-center">
+        {RegistroError.map((error, i) => (
+            <Message message={error} key={i} />
+          ))}
+
         <Card>
           <h1 className="text-3xl font-bold">Registro</h1>
-          <form onSubmit={handleSubmit(async (values) => {
-            console.log(values);
-            const res = await registerRequest(values)
-            console.log(res)
-          })}>
+          <form onSubmit={onSubmit}>
             <Label htmlFor="nombre">Nombre completo :</Label>
             <Input
               type="text"
@@ -52,6 +52,9 @@ function Registro() {
               {...register("nombre", {required:true})}
             />
            
+           {errors.nombre?.message && (
+              <p className="text-red-500">{errors.nombre?.message}</p>
+            )} 
 
             <Label htmlFor="usuario">Usuario:</Label>
             <Input
@@ -61,11 +64,16 @@ function Registro() {
               {...register("usuario", {required:true})}
   
             />
+
+            {errors.usuario?.message && (
+              <p className="text-red-500">{errors.usuario?.message}</p>
+            )} 
               
           <Label htmlFor="plan">Plan:</Label>
           <select
             name="plan"
-            className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md"
+            className="w-80 bg-zinc-700 text-white px-2 py-2 rounded-md"
+            style={{ fontSize: "14px" }} // Ajusta el tamaño de la fuente según sea necesario
             {...register("plan", { required: true })}
           >
             <option value="Plan 1">Plan uno</option>
@@ -79,6 +87,10 @@ function Registro() {
               placeholder="tucorreo@dominio.com"
               {...register("correo", {required:true})}
             />
+
+           {errors.correo?.message && (
+              <p className="text-red-500">{errors.correo?.message}</p>
+            )}
            
             <Label htmlFor="contraseña">Contraseña:</Label>
             <Input
@@ -88,6 +100,9 @@ function Registro() {
               {...register("contraseña", {required:true})}
             />
           
+            {errors.contraseña?.message && (
+              <p className="text-red-500">{errors.contraseña?.message}</p>
+            )}
   
             <Label htmlFor="confirmarContraseña">Confirmar Contraseña:</Label>
             <Input
@@ -96,8 +111,13 @@ function Registro() {
               placeholder="********"
               {...register("confirmarContraseña", {required:true})}
             />
+
+            {errors.confirmarContraseña?.message && (
+              <p className="text-red-500">{errors.confirmarContraseña?.message}</p>
+            )}
+
           
-            <Button>Enviar</Button>
+          <Button >Enviar</Button>
           </form>
           <p>
             ¿Ya tienes una cuenta? &nbsp;
@@ -112,23 +132,3 @@ function Registro() {
 
 export default Registro
 
-
-/*
-
- {errors.usuario?.message && (
-              <p className="text-red-500">{errors.usuario?.message}</p>
-            )} 
-
- {errors.correo?.message && (
-              <p className="text-red-500">{errors.correo?.message}</p>
-            )}
-
-
-
-  {errors.confirmarContraseña?.message && (
-              <p className="text-red-500">{errors.confirmarContraseña?.message}</p>
-            )}
-
-            
-
-            */

@@ -1,10 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-
+import { AuthProvider } from "./contexto/autenticacionContexto"
 import Acceso from './paginas/Acceso' 
 import Registro from './paginas/Registro'
 
 function App() {
   return (
+    <AuthProvider>
     <BrowserRouter>
     <Routes>
     <Route path="/" element= {<h1> Home Page</h1>} />
@@ -17,6 +18,7 @@ function App() {
     <Route path="/Perfil" element= {<h1> Perfil</h1>} />
     </Routes>
     </BrowserRouter>
+    </AuthProvider>
   )
 }
 //<h1 className="text-4xl font-bold">Hola mundo</h1>
