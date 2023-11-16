@@ -17,6 +17,7 @@ import { Card, Message, Button, Input, Label} from "../componentes/ui";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
+import { registerRequest } from "../api/autenticancion";
 
 
 function Registro() {
@@ -38,8 +39,10 @@ function Registro() {
       <div className="flex items-center justify-center">
         <Card>
           <h1 className="text-3xl font-bold">Registro</h1>
-          <form onSubmit={handleSubmit(values => {
-            console.log(values)
+          <form onSubmit={handleSubmit(async (values) => {
+            console.log(values);
+            const res = await registerRequest(values)
+            console.log(res)
           })}>
             <Label htmlFor="nombre">Nombre completo :</Label>
             <Input
@@ -65,19 +68,18 @@ function Registro() {
             className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md"
             {...register("plan", { required: true })}
           >
-            <option value="Plan 1">Plan unus</option>
-            <option value="Plan 2">Plan duo</option>
-            <option value="Plan 3">Plan tris</option>
+            <option value="Plan 1">Plan uno</option>
+            <option value="Plan 2">Plan dos</option>
+            <option value="Plan 3">Plan tres</option>
           </select>
 
             <Label htmlFor="correo">Correo Electrónico:</Label>
             <Input
               name="correo"
-              placeholder="youremail@domain.tld"
+              placeholder="tucorreo@dominio.com"
               {...register("correo", {required:true})}
             />
            
-  
             <Label htmlFor="contraseña">Contraseña:</Label>
             <Input
               type="contraseña"
@@ -98,9 +100,9 @@ function Registro() {
             <Button>Enviar</Button>
           </form>
           <p>
-            ¿Ya tienes una cuenta?
+            ¿Ya tienes una cuenta? &nbsp;
             <Link className="text-sky-500" to="/login">
-              Acceder
+            Acceder
             </Link>
           </p>
        </Card>
