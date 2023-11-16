@@ -1,133 +1,100 @@
-import { useForm } from "react-hook-form";
+/*
+import { useEffect } from "react";
+import { useAuth } from "../contexto/autenticacionContexto";
+import { Registro_esquema } from "../esquemas/autenticacion";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-function Registro() {
-    const { signup, errors: registerErrors, isAuthenticated } = useAuth();
-    const {
-      register,
-      handleSubmit,
-      formState: { errors },
-    } = useForm({
-      resolver: zodResolver(registerSchema),
-    });
-    const navigate = useNavigate();
-  
-    const [selectedPlan, setSelectedPlan] = React.useState([]);
-
-    const handleCheckboxChange = (plan) => {
-      if (selectedPlan.includes(plan)) {
-        setSelectedPlan(selectedPlan.filter((selected) => selected !== plan));
-      } else {
-        setSelectedPlan([...selectedPlan, plan]);
-      }
-    };
-
-    const onSubmit = async (value) => {
-      await signup(value);
-    };
-  
-    useEffect(() => {
-      if (isAuthenticated) navigate("/tasks");
-    }, [isAuthenticated]);
-  
-    return (
-      <div className="h-[calc(100vh-100px)] flex items-center justify-center">
-        <Card>
-          {registerErrors.map((error, i) => (
+ {registerErrors.map((error, i) => (
             <Message message={error} key={i} />
           ))}
-          <h1 className="text-3xl font-bold">Register</h1>
-          <form onSubmit={handleSubmit(onSubmit)}>
+
+            {errors.contraseña?.message && (
+              <p className="text-red-500">{errors.contraseña?.message}</p>
+            )}
+
+*/
+import { Card, Message, Button, Input, Label} from "../componentes/ui";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useState } from 'react';
+
+
+function Registro() {
+    //const { signup, errors: registerErrors, isAuthenticated } = useAuth();
+    const {register, handleSubmit,
+     // formState: { errors },
+    } = useForm();
+    //const navigate = useNavigate();
+
+    //const onSubmit = async (value) => {
+    //  await signup(value);
+   // };
+ 
+    //useEffect(() => {
+    //  if (isAuthenticated) navigate("/tasks");
+   // }, [isAuthenticated]); h-[calc(8vh-80px)]
+  
+    return (
+      <div className="flex items-center justify-center">
+        <Card>
+          <h1 className="text-3xl font-bold">Registro</h1>
+          <form onSubmit={handleSubmit(values => {
+            console.log(values)
+          })}>
             <Label htmlFor="nombre">Nombre completo :</Label>
             <Input
               type="text"
               name="nombre"
               placeholder="Escribe tu nombre completo"
-              {...register("nombre")}
-              autoFocus
+              {...register("nombre", {required:true})}
             />
-            {errors.nombre?.message && (
-              <p className="text-red-500">{errors.nombre?.message}</p>
-            )}
+           
 
             <Label htmlFor="usuario">Usuario:</Label>
             <Input
               type="text"
               name="usuario"
               placeholder="Escribe tu usario de acceso"
-              {...register("usuario")}
-              autoFocus
-            />
-            {errors.usuario?.message && (
-              <p className="text-red-500">{errors.usuario?.message}</p>
-            )} 
-            
-            <Label htmlFor="plan">Plan:</Label>
-          <div>
-            <input
-              type="checkbox"
-              id="planUnus"
-              name="plan"
-              value="Plan 1"
-              checked={selectedPlan.includes('Plan 1')}
-              onChange={() => handleCheckboxChange('Plan 1')}
-            />
-            <label htmlFor="planUnus">Plan unus</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="planDuo"
-              name="plan"
-              value="Plan 2"
-              checked={selectedPlan.includes('Plan 2')}
-              onChange={() => handleCheckboxChange('Plan 2')}
-            />
-            <label htmlFor="planDuo">Plan duo</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="planTris"
-              name="plan"
-              value="Plan 3"
-              checked={selectedPlan.includes('Plan 3')}
-              onChange={() => handleCheckboxChange('Plan 3')}
-            />
-            <label htmlFor="planTris">Plan tris</label>
-            {...register("plan", { required: true })}
-            </div>
+              {...register("usuario", {required:true})}
   
+            />
+              
+          <Label htmlFor="plan">Plan:</Label>
+          <select
+            name="plan"
+            className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md"
+            {...register("plan", { required: true })}
+          >
+            <option value="Plan 1">Plan unus</option>
+            <option value="Plan 2">Plan duo</option>
+            <option value="Plan 3">Plan tris</option>
+          </select>
+
             <Label htmlFor="correo">Correo Electrónico:</Label>
             <Input
               name="correo"
               placeholder="youremail@domain.tld"
-              {...register("correo")}
+              {...register("correo", {required:true})}
             />
-            {errors.correo?.message && (
-              <p className="text-red-500">{errors.correo?.message}</p>
-            )}
+           
   
             <Label htmlFor="contraseña">Contraseña:</Label>
             <Input
               type="contraseña"
               name="contraseña"
               placeholder="********"
-              {...register("contraseña")}
+              {...register("contraseña", {required:true})}
             />
-            {errors.contraseña?.message && (
-              <p className="text-red-500">{errors.contraseña?.message}</p>
-            )}
+          
   
             <Label htmlFor="confirmarContraseña">Confirmar Contraseña:</Label>
             <Input
               type="contraseña"
               name="confirmarContraseña"
               placeholder="********"
-              {...register("confirmarContraseña")}
+              {...register("confirmarContraseña", {required:true})}
             />
-            {errors.confirmarContraseña?.message && (
-              <p className="text-red-500">{errors.confirmarContraseña?.message}</p>
-            )}
+          
             <Button>Enviar</Button>
           </form>
           <p>
@@ -136,9 +103,30 @@ function Registro() {
               Acceder
             </Link>
           </p>
-        </Card>
+       </Card>
       </div>
     );
   }
 
 export default Registro
+
+
+/*
+
+ {errors.usuario?.message && (
+              <p className="text-red-500">{errors.usuario?.message}</p>
+            )} 
+
+ {errors.correo?.message && (
+              <p className="text-red-500">{errors.correo?.message}</p>
+            )}
+
+
+
+  {errors.confirmarContraseña?.message && (
+              <p className="text-red-500">{errors.confirmarContraseña?.message}</p>
+            )}
+
+            
+
+            */

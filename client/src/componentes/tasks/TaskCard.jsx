@@ -1,4 +1,4 @@
-import { useTasks } from "../../context/tasksContext";
+/* import { useTasks } from "../../context/tasksContext";
 import { Button, ButtonLink, Card } from "../ui";
 
 export function TaskCard({ task }) {
@@ -14,7 +14,7 @@ export function TaskCard({ task }) {
         </div>
       </header>
       <p className="text-slate-300">{task.description}</p>
-      {/* format date */}
+      {/* format date *//*
       <p>
         {task.date &&
           new Date(task.date).toLocaleDateString("en-US", {
@@ -27,3 +27,4 @@ export function TaskCard({ task }) {
     </Card>
   );
 }
+*/

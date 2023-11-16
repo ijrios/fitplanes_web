@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { createContext, useContext, useState } from "react";
-import { loginRequest, registerRequest, verifyTokenRequest } from "../api/auth";
+import { loginRequest, registerRequest, verifyTokenRequest } from "../api/autenticancion";
 import Cookies from "js-cookie";
 
 const AuthContext = createContext();
@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // clear errors after 5 seconds
+  // limpia errores despues de 5 segundos
   useEffect(() => {
     if (errors.length > 0) {
       const timer = setTimeout(() => {
@@ -27,9 +27,9 @@ export const AuthProvider = ({ children }) => {
     }
   }, [errors]);
 
-  const signup = async (user) => {
+  const signup = async (usuario) => {
     try {
-      const res = await registerRequest(user);
+      const res = await registerRequest(usuario);
       if (res.status === 200) {
         setUser(res.data);
         setIsAuthenticated(true);
@@ -40,9 +40,9 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const signin = async (user) => {
+  const signin = async (usuario) => {
     try {
-      const res = await loginRequest(user);
+      const res = await loginRequest(usuario);
       setUser(res.data);
       setIsAuthenticated(true);
     } catch (error) {
