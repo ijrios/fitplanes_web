@@ -12,6 +12,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
     "axios": "^1.6.2",
+    "dayjs": "^1.11.10",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "jws": "^4.0.0",

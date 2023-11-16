@@ -27,7 +27,7 @@ export const Acceso = () => {
   return (
     <div className="h-[calc(100vh-100px)] flex items-center justify-center">
       <Card>
-        <h1 className="text-2xl font-bold">Login</h1>
+        <h1 className="text-2xl font-bold">Acceso</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Label htmlFor="plan">Plan:</Label>
           <select
@@ -68,7 +68,7 @@ export const Acceso = () => {
           </form>
 
         <p className="flex gap-x-2 justify-between">
-          ¿No tienes una cuenta? <Link to="/register" className="text-sky-500">Sign up</Link>
+          ¿No tienes una cuenta? <Link to="/register" className="text-sky-500">Registrarse</Link>
         </p>
       </Card>
     </div>

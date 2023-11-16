@@ -1,5 +1,5 @@
-/*import { Link } from "react-router-dom";
-import { useAuth } from "../contexto/authContext";
+import { Link } from "react-router-dom";
+import { useAuth } from "../contexto/autenticacionContexto";
 import { ButtonLink } from "./ui/ButtonLink";
 
 export function Navbar() {
@@ -9,7 +9,7 @@ export function Navbar() {
   return (
     <nav className="bg-zinc-700 my-3 flex justify-between py-5 px-10 rounded-lg">
       <h1 className="text-2xl font-bold">
-        <Link to={isAuthenticated ? "/tasks" : "/"}>Task Manager</Link>
+        <Link to={isAuthenticated ? "/tasks" : "/"}>FitPlanes</Link>
       </h1>
       <ul className="flex gap-x-2">
         {isAuthenticated ? (
@@ -29,10 +29,10 @@ export function Navbar() {
         ) : (
           <>
             <li>
-              <ButtonLink to="/login">Login</ButtonLink>
+              <ButtonLink to="/Acceso">Acceso</ButtonLink>
             </li>
             <li>
-              <ButtonLink to="/register">Register</ButtonLink>
+              <ButtonLink to="/Registro">Registro</ButtonLink>
             </li>
           </>
         )}
@@ -40,4 +40,3 @@ export function Navbar() {
     </nav>
   );
 }
-*/

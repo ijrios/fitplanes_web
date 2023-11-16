@@ -1,14 +1,18 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { AuthProvider } from "./contexto/autenticacionContexto"
+import { Navbar } from "./componentes/Navbar";
 import Acceso from './paginas/Acceso' 
 import Registro from './paginas/Registro'
+import Pagina_inicio from './paginas/Pagina_inicio'
 
 function App() {
   return (
     <AuthProvider>
     <BrowserRouter>
+    <main className="container content-container mx-auto px-10 md:px-0">
+    <Navbar />
     <Routes>
-    <Route path="/" element= {<h1> Home Page</h1>} />
+    <Route path="/Pagina_inicio" element= {<Pagina_inicio />} />
     <Route path="/Acceso" element= {<Acceso />} />
     <Route path="/Registro" element= {<Registro />} />
     <Route path="/Plan 1" element= {<h1> Plan uno</h1>} />
@@ -17,6 +21,7 @@ function App() {
     <Route path="/add-taks" element= {<h1> añadir tarea</h1>} />
     <Route path="/Perfil" element= {<h1> Perfil</h1>} />
     </Routes>
+    </main>
     </BrowserRouter>
     </AuthProvider>
   )
