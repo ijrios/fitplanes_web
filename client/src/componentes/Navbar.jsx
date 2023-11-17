@@ -34,7 +34,10 @@ export function Navbar() {
               Bienvenido {usuario.usuario}
             </li>
             <li>
-              <ButtonLink to="/Tareas_form">Agregar tarea</ButtonLink>
+              <ButtonLink to="/Tareas_form">Agregar proceso</ButtonLink>
+            </li>
+            <li>
+              <ButtonLink to="/Tareas_pagina">Mostrar proceso</ButtonLink>
             </li>
             <li>
               <ButtonLink to="/" onClick={() => logout()}>
