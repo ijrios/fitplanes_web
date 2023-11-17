@@ -25,21 +25,21 @@ export function Navbar() {
   return (
     <nav className="bg-zinc-700 my-3 flex justify-between py-5 px-10 rounded-lg">
       <h1 className="text-2xl font-bold">
-        <Link to={isAuthenticated ? "/Pagina_inicio" : "/"}>FitPlanes</Link>
+        <Link to={isAuthenticated ? "/Pagina_inicio" : "/Pagina_inicio"}>FitPlanes</Link>
       </h1>
       <ul className="flex gap-x-2">
         {isAuthenticated ? (
           <>
             <li>
-              Bienvenido {usuario}
+              Bienvenido {usuario.usuario}
             </li>
             <li>
-              <ButtonLink to="/add-task">Agregar tarea</ButtonLink>
+              <ButtonLink to="/Tareas_form">Agregar tarea</ButtonLink>
             </li>
             <li>
-              <Link to="/" onClick={() => logout()}>
+              <ButtonLink to="/" onClick={() => logout()}>
                 Cerrar sesión
-              </Link>
+              </ButtonLink>
             </li>
           </>
         ) : (

@@ -2,7 +2,7 @@
 import React from 'react';
 
 const PlanCard = ({ title, training, nutrition }) => (
-  <header className="bg-zinc-800 p-4 rounded-lg bg-opacity-50 w-120 h-120 flex items-center justify-center">
+  <header className="flex-grow bg-zinc-800 p-4 rounded-lg bg-opacity-50 flex items-center justify-center">
     <div className="text-center">
       <h2 className="text-sm font-bold mb-2">{title}</h2>
       <div>

@@ -11,16 +11,14 @@ export const Acceso = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(registerSchema),
-  });
+  } = useForm();
 
   const onSubmit =  handleSubmit(async (data) => {
     await signin(data);
   })
 
   useEffect(() => {
-    if (isAuthenticated) navigate("/");
+    if (isAuthenticated) navigate("/Tareas_form");
   }, [isAuthenticated]);
 
 
