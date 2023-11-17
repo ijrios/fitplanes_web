@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 body {
-    background: #202020;
-    color: white;
+  background-image: url('https://t2.uc.ltmcdn.com/es/posts/1/0/4/que_es_el_fitness_y_sus_beneficios_52401_orig.jpg');  /* Ajusta la URL según la ubicación de tu imagen */
+  background-size: cover; 
+  background-position: center;  /* Centra la imagen en el contenedor */
+  color: white;
+}
+
+.content-container {
+  height: calc(100vh - theme("spacing.20"));
 }

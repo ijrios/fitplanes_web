@@ -13,12 +13,13 @@ export const obtener_tareas = async (req, res) => {
 // Creamos las tareas
 export const crear_tarea = async (req, res) => {
     try {
-      const { dias_entrenamiento, descripcion, hidratacion, dieta, fecha } = req.body;
+      const { dias_entrenamiento, descripcion, hidratacion, dieta, peso, fecha } = req.body;
       const nuevaTarea = new Tareas_duo({
         dias_entrenamiento,
         descripcion,
         hidratacion,
         dieta,
+        peso,
         fecha,
         usuario: req.user.id
       });
@@ -45,10 +46,10 @@ export const crear_tarea = async (req, res) => {
   // Actualizamos tareas segun id
   export const actualizar_tareas = async (req, res) => {
     try {
-      const { dias_entrenamiento, descripcion, hidratacion, dieta } = req.body;
+      const { dias_entrenamiento, descripcion, hidratacion, dieta, peso } = req.body;
       const tareaActualizada = await Tareas_duo.findByIdAndUpdate(
         req.params.id,
-        { dias_entrenamiento, descripcion, hidratacion, dieta },
+        { dias_entrenamiento, descripcion, hidratacion, dieta, peso },
         { new: true }
       );
       return res.json(tareaActualizada);

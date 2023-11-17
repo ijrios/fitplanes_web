@@ -10,6 +10,7 @@ import { ValidacionRequerida } from "../middlewares/Validar_token.js";
 
 const router = Router();
 
+
 router.get("/tareas_duo", ValidacionRequerida, obtener_tareas);
 
 router.post("/tareas_duo", ValidacionRequerida, crear_tarea);

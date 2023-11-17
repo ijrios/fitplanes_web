@@ -5,30 +5,30 @@ import { useEffect } from "react";
 import { useAuth } from "../contexto/autenticacionContexto";
 
 export const Acceso = () => {
-  const { signin, plan,isAuthenticated } = useAuth();
+  const { signin, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: zodResolver(registerSchema),
+  });
 
-  const onSubmit =  handleSubmit(async (values) => {
-    await signin(values);
+  const onSubmit =  handleSubmit(async (data) => {
+    await signin(data);
   })
 
   useEffect(() => {
-    if (isAuthenticated && plan == "Plan 1") navigate("/Plan 1");
-    if (isAuthenticated && plan == "Plan 2") navigate("/Plan 2");
-    if (isAuthenticated && plan == "Plan 3") navigate("/Plan 3");
-  }, [isAuthenticated, plan]);
+    if (isAuthenticated) navigate("/");
+  }, [isAuthenticated]);
 
 
   return (
     <div className="h-[calc(100vh-100px)] flex items-center justify-center">
       <Card>
         <h1 className="text-2xl font-bold">Acceso</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={(onSubmit)}>
           <Label htmlFor="plan">Plan:</Label>
           <select
             name="plan"
@@ -68,11 +68,11 @@ export const Acceso = () => {
           </form>
 
         <p className="flex gap-x-2 justify-between">
-          ¿No tienes una cuenta? <Link to="/register" className="text-sky-500">Registrarse</Link>
+          ¿No tienes una cuenta? <Link to="/Registro" className="text-sky-500">Registrarse</Link>
         </p>
       </Card>
     </div>
   );
 };
 
-export default Acceso
+export default Acceso;

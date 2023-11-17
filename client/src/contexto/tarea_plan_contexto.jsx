@@ -5,7 +5,7 @@ import {
   getTasksRequest,
   getTaskRequest,
   updateTaskRequest,
-} from "../api/tareas_plan_2";
+} from "../api/tareas";
 
 const TaskContext = createContext();
 
@@ -73,3 +73,5 @@ export function TaskProvider({ children }) {
     </TaskContext.Provider>
   );
 }
+
+export default TaskProvider;

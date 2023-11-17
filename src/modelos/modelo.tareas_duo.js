@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const Tarea_duo_esquema = new mongoose.Schema(
   {
     dias_entrenamiento: {
-      type: String,
+      type: Number,
       required: true,
     },
     descripcion: {
@@ -11,11 +11,15 @@ const Tarea_duo_esquema = new mongoose.Schema(
       required: true,
     },
     hidratacion: {
-      type: String,
+      type: Number,
       required: true,
     },
     dieta: {
         type: String,
+        required: true,
+      },
+    peso: {
+        type: Number,
         required: true,
       },
     fecha: {
