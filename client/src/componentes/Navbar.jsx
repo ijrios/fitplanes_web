@@ -21,11 +21,10 @@ export function Navbar() {
     }
   };
 */
-
   return (
-    <nav className="bg-zinc-700 my-3 flex justify-between py-5 px-10 rounded-lg">
+    <nav className="bg-zinc-700 my-0 flex justify-between bg-opacity-50 py-5 px-10">
       <h1 className="text-2xl font-bold">
-        <Link to={isAuthenticated ? "/Pagina_inicio" : "/Pagina_inicio"}>FitPlanes</Link>
+        <Link to={isAuthenticated ? "/Pagina_inicio" : "/"}>FitPlanes</Link>
       </h1>
       <ul className="flex gap-x-2">
         {isAuthenticated ? (
@@ -35,9 +34,6 @@ export function Navbar() {
             </li>
             <li>
               <ButtonLink to="/Tareas_form">Agregar proceso</ButtonLink>
-            </li>
-            <li>
-              <ButtonLink to="/Tareas_pagina">Mostrar proceso</ButtonLink>
             </li>
             <li>
               <ButtonLink to="/" onClick={() => logout()}>

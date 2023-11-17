@@ -8,14 +8,13 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { useState } from 'react';
 import { useAuth } from "../contexto/autenticacionContexto";
-import { registerRequest } from "../api/autenticancion";
-import { Registro_esquema } from "../esquemas/autenticacion";
+import { registerRequest } from "../api/autenticacion";
 
 
 function Registro() {
     const {signup, isAuthenticated, errors: registerErrors} = useAuth();
     //console.log(usuario)
-    const {register, handleSubmit, formState:{errors}} = useForm();
+    const {register, handleSubmit, formState:{ errors}} = useForm();
     const navigate = useNavigate();
     
     const onSubmit = async (value) => {
@@ -30,22 +29,17 @@ function Registro() {
     return (
       <div className="flex items-center justify-center">
         <Card>
-        {registerErrors.map((error, i) => (
-          <Message message={error} key={i} />
-        ))}
           <h1 className="text-3xl font-bold">Registro</h1>
-          <form onSubmit = {onSubmit}>
+          <form onSubmit = {handleSubmit(onSubmit)}>
             <Label htmlFor="nombre">Nombre completo :</Label>
             <Input
               type="text"
               name="nombre"
               placeholder="Escribe tu nombre completo"
               {...register("nombre", {required:true})}
+
             />
            
-           {errors.nombre && (
-              <p className="text-red-500">{errors.nombre}</p>
-            )} 
 
             <Label htmlFor="usuario">Usuario:</Label>
             <Input
@@ -56,10 +50,6 @@ function Registro() {
             
   
             />
-
-            {errors.usuario && (
-              <p className="text-red-500">{errors.usuario}</p>
-            )} 
               
           <Label htmlFor="plan">Plan:</Label>
           <select
@@ -76,42 +66,29 @@ function Registro() {
 
             <Label htmlFor="correo">Correo Electrónico:</Label>
             <Input
+              type= "mail"
               name="correo"
               placeholder="tucorreo@dominio.com"
               {...register("correo", {required:true})}
              
             />
-
-           {errors.correo  && (
-              <p className="text-red-500">{errors.correo}</p>
-            )}
            
             <Label htmlFor="contraseña">Contraseña:</Label>
             <Input
-              type="contraseña"
+              type="password"
               name="contraseña"
               placeholder="********"
               {...register("contraseña", {required:true})}
+              autoFocus
             />
-          
-            {errors.contraseña  && (
-              <p className="text-red-500">{errors.contraseña}</p>
-            )}
-  
+        
             <Label htmlFor="confirmarContraseña">Confirmar Contraseña:</Label>
             <Input
-              type="contraseña"
+              type="password"
               name="confirmarContraseña"
               placeholder="********"
               {...register("confirmarContraseña", {required:true})}
-              autoFocus
             />
-
-            {errors.confirmarContraseña  && (
-              <p className="text-red-500">{errors.confirmarContraseña}</p>
-            )}
-
-          
           <Button>Enviar</Button>
           </form>
           <p>
@@ -125,12 +102,4 @@ function Registro() {
     );
   }
 
-  export default Registro
-
-  /*
-    useEffect(() => {
-      if (isAuthenticated && plan == "Plan 1") navigate("/Plan 1");
-      if (isAuthenticated && plan == "Plan 2") navigate("/Plan 2");
-      if (isAuthenticated && plan == "Plan 3") navigate("/Plan 3");
-    }, [isAuthenticated,plan]);
-  */
+export default Registro

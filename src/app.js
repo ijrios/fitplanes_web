@@ -27,6 +27,15 @@ app.use("/api", ruta_tarea_unus);
 app.use("/api", ruta_tarea_duo);
 app.use("/api", ruta_tarea_tris);
 
+if (process.env.NODE_ENV === "production") {
+    const path = await import("path");
+    app.use(express.static("cliente/dist"));
+  
+    app.get("*", (req, res) => {
+      console.log(path.resolve("cliente", "dist", "index.html") );
+      res.sendFile(path.resolve("cliente", "dist", "index.html"));
+    });
+  }
 
 
 export default app;

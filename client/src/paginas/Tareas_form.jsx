@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 dayjs.extend(utc);
 
 export function Tareas_form() {
-  const { createTask, getTask, updateTask } = useTasks();
+  const { createTask, getTask, updateTask} = useTasks();
   const navigate = useNavigate();
   const params = useParams();
   const {
@@ -118,6 +118,10 @@ export function Tareas_form() {
         <Button>Guardar</Button>
       </form>
     </Card>
+    
+    
+     
+     
   );
 }
 

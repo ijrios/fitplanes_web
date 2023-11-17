@@ -6,6 +6,7 @@ function Pagina_inicio() {
     <header className="bg-zinc-800 p-6 rounded-lg bg-opacity-50 w-4/5 max-w-2xl text-center mt-8">
     <h1 className="text-2xl py-4 font-bold">¡Bienvenido a FitPlanes!</h1>
     <p className="text-sm text-slate-400">
+    
     FitPlanes es tu compañero de bienestar y fitness personal, diseñado para ayudarte a planificar, seguir y alcanzar tus metas de acondicionamiento físico y salud. Ya sea que estés interesado en mejorar tu estado físico, llevar un registro de tu dieta o simplemente mantenerte saludable, FitPlanes te brinda las herramientas y la motivación necesarias.
 
     Características Principales
